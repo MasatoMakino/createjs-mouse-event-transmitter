@@ -6,7 +6,7 @@ This feature is similar to [nextStage](https://createjs.com/docs/easeljs/classes
 
 ## Demo
 
-[Demo Page](https://masatomakino.github.io/createjs-mouse-event-transmitter/demo/index.html)
+[Demo Page](https://masatomakino.github.io/createjs-mouse-event-transmitter/demo/)
 
 ## Getting Started
 
