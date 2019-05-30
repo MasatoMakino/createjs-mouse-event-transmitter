@@ -66,6 +66,46 @@
 			<div class="tsd-panel tsd-typography">
 				<h1 id="createjs-mouse-event-transmitter">createjs-mouse-event-transmitter</h1>
 				<p>Transmit mouse events from createjs stage to other canvas.</p>
+				<p>This feature is similar to <a href="https://createjs.com/docs/easeljs/classes/Stage.html#property_nextStage">nextStage</a> property of createjs. The difference is the class of target. </p>
+				<h2 id="demo">Demo</h2>
+				<p><a href="https://masatomakino.github.io/createjs-mouse-event-transmitter/demo/">Demo Page</a></p>
+				<h2 id="getting-started">Getting Started</h2>
+				<h3 id="install">Install</h3>
+				<p>createjs-mouse-event-transmitter depend on <a href="https://github.com/CreateJS/EaselJS">CreateJS / EaselJS</a></p>
+				<pre><code class="language-bash">npm install easeljs --save-dev</code></pre>
+				<p>or load script files in html.</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.createjs.com/1.0.0/easeljs.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<p>and</p>
+				<pre><code class="language-bash">npm install https://github.com/MasatoMakino/createjs-mouse-event-transmitter.git --save-dev</code></pre>
+				<h3 id="import">Import</h3>
+				<p>createjs-mouse-event-transmitter is composed of ES6 modules and TypeScript d.ts files.</p>
+				<p>At first, import a class.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { MouseEventTransmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">"createjs-mouse-event-transmitter"</span>;</code></pre>
+				<h3 id="setting-stage">Setting stage</h3>
+				<p>Enables mouse over events for a stage.</p>
+				<p><a href="https://createjs.com/docs/easeljs/classes/Stage.html#method_enableMouseOver">enableMouseOver</a></p>
+				<pre><code class="language-js">stage.enableMouseOver();</code></pre>
+				<h3 id="init">Init</h3>
+				<p>Init html</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"topCanvas"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"1920"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"1080"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"bottomCanvas"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"1920"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"1080"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre>
+				<p>and javascript.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> topCanvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"topCanvas"</span>);
+<span class="hljs-keyword">const</span> stage = <span class="hljs-keyword">new</span> createjs.Stage(topCanvas);
+stage.enableMouseOver();
+
+<span class="hljs-keyword">const</span> bottomCanvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"bottomCanvas"</span>);
+<span class="hljs-keyword">const</span> transmitter = <span class="hljs-keyword">new</span> MouseEventTransmitter(stage, bottomCanvas);</code></pre>
+				<p><code>bottomCanvas</code> is able to handle mouse events.</p>
+				<pre><code class="language-js">bottomCanvas.addEventListener(<span class="hljs-string">"mousedown"</span>, e =&gt; {
+  <span class="hljs-built_in">console</span>.log(e.type);
+});</code></pre>
+				<p><a href="https://masatomakino.github.io/createjs-mouse-event-transmitter/api/index.html">API documents</a></p>
+				<p>see also <a href="https://masatomakino.github.io/createjs-mouse-event-transmitter/demo/main.js">demo script</a>.</p>
+				<h2 id="license">License</h2>
+				<p>createjs-mouse-event-transmitter is <a href="LICENSE">MIT licensed</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
