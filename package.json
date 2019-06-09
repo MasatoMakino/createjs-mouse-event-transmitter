@@ -1,6 +1,6 @@
 {
   "name": "createjs-mouse-event-transmitter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Transmit mouse events from createjs stage to other canvas.",
   "main": "./bin/index.js",
   "types": "./bin/index.d.ts",
@@ -9,19 +9,19 @@
   "license": "MIT",
   "devDependencies": {
     "@types/easeljs": "^1.0.0",
-    "browser-sync": "^2.26.5",
-    "husky": "^2.3.0",
-    "prettier": "^1.17.1",
+    "browser-sync": "^2.26.7",
+    "husky": "^2.4.0",
+    "prettier": "^1.18.2",
     "replace-in-file": "^4.1.0",
-    "rollup": "^1.12.5",
+    "rollup": "^1.14.4",
     "typedoc": "^0.14.2",
     "typescript": "^3.5.1"
   },
   "scripts": {
     "build": "npm run prettier:src && tsc && npm run rollup",
-    "prettier:src": "prettier --write './!(bin|docs)/**/*.{js,ts,json}' ",
+    "prettier:src": "prettier --write './!(bin|docs|coverage)/**/*.{js,ts,json}' ",
     "rollup": "rollup --config",
-    "watch": "npm run watch:tsc | npm run watch:rollup  | npm run watch:server ",
+    "watch": "npm run watch:tsc | npm run watch:rollup | npm run watch:server",
     "watch:tsc": "tsc -w",
     "watch:rollup": "rollup --config -w",
     "watch:server": "node task/browsersync.js development",
