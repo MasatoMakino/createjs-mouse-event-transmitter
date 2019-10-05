@@ -1,4 +1,5 @@
 import Stage = createjs.Stage;
+import Ticker = createjs.Ticker;
 
 /**
  * createjsのcanvasに対するMouseEventを下層に透過させるクラス。
@@ -9,7 +10,8 @@ export class MouseEventTransmitter {
   private transmitTarget: HTMLElement;
   private isDragging: boolean = false;
   private isDraggingTransmitTarget: boolean = false;
-
+  private isListen: boolean;
+  private isThrottling: boolean = false;
   /**
    * 初期化処理
    * @param {createjs.Stage} stage createjsのstageオブジェクト
@@ -26,26 +28,40 @@ export class MouseEventTransmitter {
           "stage.enableMouseOver()関数を実行してドラッグ操作を有効にしてください。"
       );
     }
+    this.start();
 
+    Ticker.addEventListener("tick", () => {
+      this.isThrottling = false;
+    });
+  }
+
+  public start(): void {
+    if (this.isListen) return;
     const canvas = this.stage.canvas as HTMLCanvasElement;
     canvas.addEventListener("mousemove", this.onMouseMove, false);
     canvas.addEventListener("mousedown", this.onMouseDown, false);
     canvas.addEventListener("mouseup", this.onMouseUpLeave, false);
     canvas.addEventListener("mouseleave", this.onMouseUpLeave, false);
     canvas.addEventListener("wheel", this.onWheelEvent, false);
+    this.isListen = true;
   }
 
-  /**
-   * 全てのイベントリスナーを破棄する。
-   */
-  public dispose(): void {
+  public stop(): void {
+    if (!this.isListen) return;
     const canvas = this.stage.canvas as HTMLCanvasElement;
     canvas.removeEventListener("mousemove", this.onMouseMove);
     canvas.removeEventListener("mousedown", this.onMouseDown);
     canvas.removeEventListener("mouseup", this.onMouseUpLeave);
     canvas.removeEventListener("mouseleave", this.onMouseUpLeave);
     canvas.removeEventListener("wheel", this.onWheelEvent);
+    this.isListen = false;
+  }
 
+  /**
+   * 全てのイベントリスナーを破棄する。
+   */
+  public dispose(): void {
+    this.stop();
     this.stage = null;
     this.transmitTarget = null;
   }
@@ -100,10 +116,15 @@ export class MouseEventTransmitter {
    * @param e
    */
   private onMouseMove = (e: MouseEvent): void => {
+    //連続実行の絞り込み中は処理を中断。
+    if (this.isThrottling) {
+      return;
+    }
     //createjsのステージ上をドラッグ中の場合、moveイベントは伝播しない。
     if (this.isDragging && !this.isDraggingTransmitTarget) {
       return;
     }
+    this.isThrottling = true;
 
     //Transmitterターゲット上をドラッグ中の場合、必ずイベントを伝播
     const cloneEvent = new MouseEvent(e.type, e);
