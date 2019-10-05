@@ -1,3 +1,4 @@
+var Ticker = createjs.Ticker;
 /**
  * createjsのcanvasに対するMouseEventを下層に透過させるクラス。
  * stage上にマウスターゲットが存在しない場合、下層のDomElementにMouseEventを透過する。
@@ -11,6 +12,7 @@ export class MouseEventTransmitter {
     constructor(stage, transmitTarget) {
         this.isDragging = false;
         this.isDraggingTransmitTarget = false;
+        this.isThrottling = false;
         /**
          * wheelイベントを透過する。
          * stageにヒットした場合は伝播が止まる。
@@ -57,10 +59,15 @@ export class MouseEventTransmitter {
          * @param e
          */
         this.onMouseMove = (e) => {
+            //連続実行の絞り込み中は処理を中断。
+            if (this.isThrottling) {
+                return;
+            }
             //createjsのステージ上をドラッグ中の場合、moveイベントは伝播しない。
             if (this.isDragging && !this.isDraggingTransmitTarget) {
                 return;
             }
+            this.isThrottling = true;
             //Transmitterターゲット上をドラッグ中の場合、必ずイベントを伝播
             const cloneEvent = new MouseEvent(e.type, e);
             if (this.isDraggingTransmitTarget) {
@@ -80,23 +87,38 @@ export class MouseEventTransmitter {
             console.warn("指定されたstageでドラッグ操作が無効です。" +
                 "stage.enableMouseOver()関数を実行してドラッグ操作を有効にしてください。");
         }
+        this.start();
+        Ticker.addEventListener("tick", () => {
+            this.isThrottling = false;
+        });
+    }
+    start() {
+        if (this.isListen)
+            return;
         const canvas = this.stage.canvas;
         canvas.addEventListener("mousemove", this.onMouseMove, false);
         canvas.addEventListener("mousedown", this.onMouseDown, false);
         canvas.addEventListener("mouseup", this.onMouseUpLeave, false);
         canvas.addEventListener("mouseleave", this.onMouseUpLeave, false);
         canvas.addEventListener("wheel", this.onWheelEvent, false);
+        this.isListen = true;
     }
-    /**
-     * 全てのイベントリスナーを破棄する。
-     */
-    dispose() {
+    stop() {
+        if (!this.isListen)
+            return;
         const canvas = this.stage.canvas;
         canvas.removeEventListener("mousemove", this.onMouseMove);
         canvas.removeEventListener("mousedown", this.onMouseDown);
         canvas.removeEventListener("mouseup", this.onMouseUpLeave);
         canvas.removeEventListener("mouseleave", this.onMouseUpLeave);
         canvas.removeEventListener("wheel", this.onWheelEvent);
+        this.isListen = false;
+    }
+    /**
+     * 全てのイベントリスナーを破棄する。
+     */
+    dispose() {
+        this.stop();
         this.stage = null;
         this.transmitTarget = null;
     }

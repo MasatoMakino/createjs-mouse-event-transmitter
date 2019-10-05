@@ -9,12 +9,16 @@ export declare class MouseEventTransmitter {
     private transmitTarget;
     private isDragging;
     private isDraggingTransmitTarget;
+    private isListen;
+    private isThrottling;
     /**
      * 初期化処理
      * @param {createjs.Stage} stage createjsのstageオブジェクト
      * @param {HTMLElement} transmitTarget MouseEventの透過先domElement
      */
     constructor(stage: Stage, transmitTarget: HTMLElement);
+    start(): void;
+    stop(): void;
     /**
      * 全てのイベントリスナーを破棄する。
      */
