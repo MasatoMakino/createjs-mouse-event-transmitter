@@ -145,6 +145,7 @@ export class MouseEventTransmitter {
    * @param e
    */
   private hitTestStage(e: MouseEvent): boolean {
-    return this.stage.hitTest(e.offsetX, e.offsetY);
+    const obj = this.stage.getObjectUnderPoint(e.offsetX, e.offsetY, 1);
+    return obj != null;
   }
 }

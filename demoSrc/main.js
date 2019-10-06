@@ -19,6 +19,13 @@ const onDomContentsLoaded = () => {
   shape.y = 360;
   stage.addChild(shape);
 
+  for (let i = 0; i < 20; i++) {
+    const text = new createjs.Text("hit test", "32px sans-serif");
+    text.x = i * 128;
+    text.mouseEnabled = false;
+    stage.addChild(text);
+  }
+
   const bottomCanvas = document.getElementById("bottomCanvas");
 
   const transmitter = new MouseEventTransmitter(stage, bottomCanvas);
@@ -34,6 +41,7 @@ const onDomContentsLoaded = () => {
     console.log(e.type);
   });
 
+  createjs.Ticker.timingMode = createjs.Ticker.RAF;
   createjs.Ticker.on("tick", updateStage);
 };
 
