@@ -19,7 +19,7 @@ export class MouseEventTransmitter {
          * @param e
          */
         this.onWheelEvent = (e) => {
-            const isHit = this.stage.hitTest(e.layerX, e.layerY);
+            const isHit = this.hitTestStage(e);
             //カンバスにヒットしなければ伝播。
             if (isHit)
                 return;
@@ -32,7 +32,7 @@ export class MouseEventTransmitter {
          * @param e
          */
         this.onMouseDown = (e) => {
-            const isHit = this.stage.hitTest(e.layerX, e.layerY);
+            const isHit = this.hitTestStage(e);
             this.isDragging = true;
             this.isDraggingTransmitTarget = !isHit;
             //カンバスにヒットしなければ伝播。
@@ -75,7 +75,7 @@ export class MouseEventTransmitter {
                 return;
             }
             //ドラッグ中ではない場合、stageにヒットしたら処理中断
-            const isHit = this.stage.hitTest(e.layerX, e.layerY);
+            const isHit = this.hitTestStage(e);
             if (isHit)
                 return;
             this.transmitTarget.dispatchEvent(cloneEvent);
@@ -121,5 +121,13 @@ export class MouseEventTransmitter {
         this.stop();
         this.stage = null;
         this.transmitTarget = null;
+    }
+    /**
+     * ステージに対する当たり判定を行う。
+     * @param e
+     */
+    hitTestStage(e) {
+        const obj = this.stage.getObjectUnderPoint(e.offsetX, e.offsetY, 1);
+        return obj != null;
     }
 }

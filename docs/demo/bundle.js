@@ -21,7 +21,7 @@ class MouseEventTransmitter {
          * @param e
          */
         this.onWheelEvent = (e) => {
-            const isHit = this.stage.hitTest(e.layerX, e.layerY);
+            const isHit = this.hitTestStage(e);
             //カンバスにヒットしなければ伝播。
             if (isHit)
                 return;
@@ -34,7 +34,7 @@ class MouseEventTransmitter {
          * @param e
          */
         this.onMouseDown = (e) => {
-            const isHit = this.stage.hitTest(e.layerX, e.layerY);
+            const isHit = this.hitTestStage(e);
             this.isDragging = true;
             this.isDraggingTransmitTarget = !isHit;
             //カンバスにヒットしなければ伝播。
@@ -77,7 +77,7 @@ class MouseEventTransmitter {
                 return;
             }
             //ドラッグ中ではない場合、stageにヒットしたら処理中断
-            const isHit = this.stage.hitTest(e.layerX, e.layerY);
+            const isHit = this.hitTestStage(e);
             if (isHit)
                 return;
             this.transmitTarget.dispatchEvent(cloneEvent);
@@ -124,6 +124,14 @@ class MouseEventTransmitter {
         this.stage = null;
         this.transmitTarget = null;
     }
+    /**
+     * ステージに対する当たり判定を行う。
+     * @param e
+     */
+    hitTestStage(e) {
+        const obj = this.stage.getObjectUnderPoint(e.offsetX, e.offsetY, 1);
+        return obj != null;
+    }
 }
 
 const onDomContentsLoaded = () => {
@@ -145,6 +153,13 @@ const onDomContentsLoaded = () => {
   shape.y = 360;
   stage.addChild(shape);
 
+  for (let i = 0; i < 20; i++) {
+    const text = new createjs.Text("hit test", "32px sans-serif");
+    text.x = i * 128;
+    text.mouseEnabled = false;
+    stage.addChild(text);
+  }
+
   const bottomCanvas = document.getElementById("bottomCanvas");
 
   const transmitter = new MouseEventTransmitter(stage, bottomCanvas);
@@ -160,6 +175,7 @@ const onDomContentsLoaded = () => {
     console.log(e.type);
   });
 
+  createjs.Ticker.timingMode = createjs.Ticker.RAF;
   createjs.Ticker.on("tick", updateStage);
 };
 

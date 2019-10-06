@@ -48,5 +48,10 @@ export declare class MouseEventTransmitter {
      * @param e
      */
     private onMouseMove;
+    /**
+     * ステージに対する当たり判定を行う。
+     * @param e
+     */
+    private hitTestStage;
 }
 //# sourceMappingURL=MouseEventTransmitter.d.ts.map
