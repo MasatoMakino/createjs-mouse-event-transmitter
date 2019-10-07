@@ -13,6 +13,14 @@ export class MouseEventTransmitter {
   private isListen: boolean;
   private isThrottling: boolean = false;
   /**
+   * このフレーム数毎にmouseMoveのヒット処理が行われる。
+   * 例えば2を指定した場合は、1フレームスキップ、1フレーム処理...の順になる。
+   * 1を指定した場合は毎フレーム処理が行われる。
+   * 1以上の整数であること。
+   */
+  public skipMouseMovePerFrame: number = 2;
+  private mouseMoveCounter: number = 0;
+  /**
    * 初期化処理
    * @param {createjs.Stage} stage createjsのstageオブジェクト
    * @param {HTMLElement} transmitTarget MouseEventの透過先domElement
@@ -31,6 +39,8 @@ export class MouseEventTransmitter {
     this.start();
 
     Ticker.addEventListener("tick", () => {
+      this.mouseMoveCounter++;
+      this.mouseMoveCounter %= this.skipMouseMovePerFrame;
       this.isThrottling = false;
     });
   }
@@ -133,11 +143,8 @@ export class MouseEventTransmitter {
       return;
     }
 
-    //ドラッグ中ではない場合、stageにヒットしたら処理中断
-    const isHit = this.hitTestStage(e);
-    if (isHit) return;
-
-    this.transmitTarget.dispatchEvent(cloneEvent);
+    //ドラッグ中でない場合は、間引き処理をしながらイベントを上げる
+    this.onMouseMoveNonDragging(e);
   };
 
   /**
@@ -147,5 +154,18 @@ export class MouseEventTransmitter {
   private hitTestStage(e: MouseEvent): boolean {
     const obj = this.stage.getObjectUnderPoint(e.offsetX, e.offsetY, 1);
     return obj != null;
+  }
+
+  private onMouseMoveNonDragging(e: MouseEvent) {
+    if (this.mouseMoveCounter !== 0) {
+      return;
+    }
+
+    //ドラッグ中ではない場合、stageにヒットしたら処理中断
+    const isHit = this.hitTestStage(e);
+    if (isHit) return;
+
+    const cloneEvent = new MouseEvent(e.type, e);
+    this.transmitTarget.dispatchEvent(cloneEvent);
   }
 }
