@@ -14,6 +14,14 @@ export class MouseEventTransmitter {
         this.isDraggingTransmitTarget = false;
         this.isThrottling = false;
         /**
+         * このフレーム数毎にmouseMoveのヒット処理が行われる。
+         * 例えば2を指定した場合は、1フレームスキップ、1フレーム処理...の順になる。
+         * 1を指定した場合は毎フレーム処理が行われる。
+         * 1以上の整数であること。
+         */
+        this.skipMouseMovePerFrame = 2;
+        this.mouseMoveCounter = 0;
+        /**
          * wheelイベントを透過する。
          * stageにヒットした場合は伝播が止まる。
          * @param e
@@ -74,11 +82,8 @@ export class MouseEventTransmitter {
                 this.transmitTarget.dispatchEvent(cloneEvent);
                 return;
             }
-            //ドラッグ中ではない場合、stageにヒットしたら処理中断
-            const isHit = this.hitTestStage(e);
-            if (isHit)
-                return;
-            this.transmitTarget.dispatchEvent(cloneEvent);
+            //ドラッグ中でない場合は、間引き処理をしながらイベントを上げる
+            this.onMouseMoveNonDragging(e);
         };
         this.stage = stage;
         this.transmitTarget = transmitTarget;
@@ -89,6 +94,8 @@ export class MouseEventTransmitter {
         }
         this.start();
         Ticker.addEventListener("tick", () => {
+            this.mouseMoveCounter++;
+            this.mouseMoveCounter %= this.skipMouseMovePerFrame;
             this.isThrottling = false;
         });
     }
@@ -129,5 +136,16 @@ export class MouseEventTransmitter {
     hitTestStage(e) {
         const obj = this.stage.getObjectUnderPoint(e.offsetX, e.offsetY, 1);
         return obj != null;
+    }
+    onMouseMoveNonDragging(e) {
+        if (this.mouseMoveCounter !== 0) {
+            return;
+        }
+        //ドラッグ中ではない場合、stageにヒットしたら処理中断
+        const isHit = this.hitTestStage(e);
+        if (isHit)
+            return;
+        const cloneEvent = new MouseEvent(e.type, e);
+        this.transmitTarget.dispatchEvent(cloneEvent);
     }
 }

@@ -12,6 +12,14 @@ export declare class MouseEventTransmitter {
     private isListen;
     private isThrottling;
     /**
+     * このフレーム数毎にmouseMoveのヒット処理が行われる。
+     * 例えば2を指定した場合は、1フレームスキップ、1フレーム処理...の順になる。
+     * 1を指定した場合は毎フレーム処理が行われる。
+     * 1以上の整数であること。
+     */
+    skipMouseMovePerFrame: number;
+    private mouseMoveCounter;
+    /**
      * 初期化処理
      * @param {createjs.Stage} stage createjsのstageオブジェクト
      * @param {HTMLElement} transmitTarget MouseEventの透過先domElement
@@ -53,5 +61,6 @@ export declare class MouseEventTransmitter {
      * @param e
      */
     private hitTestStage;
+    private onMouseMoveNonDragging;
 }
 //# sourceMappingURL=MouseEventTransmitter.d.ts.map
