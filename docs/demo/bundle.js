@@ -33,7 +33,7 @@ class MouseEventTransmitter {
             //カンバスにヒットしなければ伝播。
             if (isHit)
                 return;
-            const cloneEvent = new MouseEvent(e.type, e);
+            const cloneEvent = new WheelEvent(e.type, e);
             this.transmitTarget.dispatchEvent(cloneEvent);
         };
         /**
@@ -190,7 +190,7 @@ const onDomContentsLoaded = () => {
     console.log(e.type);
   });
   bottomCanvas.addEventListener("wheel", e => {
-    console.log(e.type);
+    console.log(e.type, e);
   });
 
   createjs.Ticker.timingMode = createjs.Ticker.RAF;
