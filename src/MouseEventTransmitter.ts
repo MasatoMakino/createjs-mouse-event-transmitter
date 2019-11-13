@@ -86,7 +86,7 @@ export class MouseEventTransmitter {
 
     //カンバスにヒットしなければ伝播。
     if (isHit) return;
-    const cloneEvent = new MouseEvent(e.type, e);
+    const cloneEvent = new WheelEvent(e.type, e);
     this.transmitTarget.dispatchEvent(cloneEvent);
   };
 
