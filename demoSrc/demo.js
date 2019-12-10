@@ -38,11 +38,20 @@ const onDomContentsLoaded = () => {
     console.log(e.type);
   });
   bottomCanvas.addEventListener("wheel", e => {
-    console.log(e.type, e);
+    console.log(e.type);
   });
 
   createjs.Ticker.timingMode = createjs.Ticker.RAF;
   createjs.Ticker.on("tick", updateStage);
+
+  const canvasArray = [canvas, bottomCanvas];
+  canvasArray.forEach((canvas, index) => {
+    const style = canvas.style;
+    style.position = "absolute";
+    style.top = 0;
+    style.left = 0;
+    style.zIndex = -index;
+  });
 };
 
 /**
