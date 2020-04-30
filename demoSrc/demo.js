@@ -11,10 +11,7 @@ const onDomContentsLoaded = () => {
   stage.enableMouseOver();
 
   const shape = new createjs.Shape();
-  shape.graphics
-    .beginFill("#F0F")
-    .drawRect(0, 0, 128, 128)
-    .endFill();
+  shape.graphics.beginFill("#F0F").drawRect(0, 0, 128, 128).endFill();
   shape.x = 400;
   shape.y = 360;
   stage.addChild(shape);
@@ -31,13 +28,16 @@ const onDomContentsLoaded = () => {
   const transmitter = new MouseEventTransmitter(stage, bottomCanvas);
   console.log(transmitter);
 
-  bottomCanvas.addEventListener("mousedown", e => {
+  bottomCanvas.addEventListener("mousedown", (e) => {
     console.log(e.type);
   });
-  bottomCanvas.addEventListener("mousemove", e => {
+  bottomCanvas.addEventListener("mouseup", (e) => {
     console.log(e.type);
   });
-  bottomCanvas.addEventListener("wheel", e => {
+  bottomCanvas.addEventListener("mousemove", (e) => {
+    console.log(e.type);
+  });
+  bottomCanvas.addEventListener("wheel", (e) => {
     console.log(e.type);
   });
 
