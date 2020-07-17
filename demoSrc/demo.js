@@ -16,9 +16,12 @@ const onDomContentsLoaded = () => {
   shape.y = 360;
   stage.addChild(shape);
 
-  for (let i = 0; i < 20; i++) {
-    const text = new createjs.Text("hit test", "32px sans-serif");
-    text.x = i * 128;
+  for (let i = 0; i < 4; i++) {
+    const text = new createjs.Text(
+      "hit test : this text not hit mouse events.",
+      "32px sans-serif"
+    );
+    text.x = i * 640;
     text.mouseEnabled = false;
     stage.addChild(text);
   }
