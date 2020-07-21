@@ -2,8 +2,13 @@
   "name": "createjs-mouse-event-transmitter",
   "version": "0.2.4",
   "description": "Transmit mouse events from createjs stage to other canvas.",
-  "main": "./bin/index.js",
-  "types": "./bin/index.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "module": "./esm/index.js",
+  "files": [
+    "lib",
+    "esm"
+  ],
   "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-mouse-event-transmitter.git",
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",

@@ -1,8 +1,11 @@
 # createjs-mouse-event-transmitter
 
-Transmit mouse events from createjs stage to other canvas.
+> Transmit mouse events from createjs stage to other canvas.
 
-This feature is similar to [nextStage](https://createjs.com/docs/easeljs/classes/Stage.html#property_nextStage) property of createjs. The difference is the class of target. 
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![Maintainability](https://api.codeclimate.com/v1/badges/609f4a04b73c29bfeca2/maintainability)](https://codeclimate.com/github/MasatoMakino/createjs-mouse-event-transmitter/maintainability)
+
+This feature is similar to [nextStage](https://createjs.com/docs/easeljs/classes/Stage.html#property_nextStage) property of createjs. The difference is the class of target.
 
 ## Demo
 
@@ -75,7 +78,7 @@ const transmitter = new MouseEventTransmitter(stage, bottomCanvas);
 `bottomCanvas` is able to handle mouse events.
 
 ```js
-bottomCanvas.addEventListener("mousedown", e => {
+bottomCanvas.addEventListener("mousedown", (e) => {
   console.log(e.type);
 });
 ```
