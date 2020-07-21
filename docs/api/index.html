@@ -67,8 +67,12 @@
 				<a href="#createjs-mouse-event-transmitter" id="createjs-mouse-event-transmitter" style="color: inherit; text-decoration: none;">
 					<h1>createjs-mouse-event-transmitter</h1>
 				</a>
-				<p>Transmit mouse events from createjs stage to other canvas.</p>
-				<p>This feature is similar to <a href="https://createjs.com/docs/easeljs/classes/Stage.html#property_nextStage">nextStage</a> property of createjs. The difference is the class of target. </p>
+				<blockquote>
+					<p>Transmit mouse events from createjs stage to other canvas.</p>
+				</blockquote>
+				<p><a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a>
+				<a href="https://codeclimate.com/github/MasatoMakino/createjs-mouse-event-transmitter/maintainability"><img src="https://api.codeclimate.com/v1/badges/609f4a04b73c29bfeca2/maintainability" alt="Maintainability"></a></p>
+				<p>This feature is similar to <a href="https://createjs.com/docs/easeljs/classes/Stage.html#property_nextStage">nextStage</a> property of createjs. The difference is the class of target.</p>
 				<a href="#demo" id="demo" style="color: inherit; text-decoration: none;">
 					<h2>Demo</h2>
 				</a>
@@ -113,7 +117,7 @@ stage.enableMouseOver();
 <span class="hljs-keyword">const</span> bottomCanvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;bottomCanvas&quot;</span>);
 <span class="hljs-keyword">const</span> transmitter = <span class="hljs-keyword">new</span> MouseEventTransmitter(stage, bottomCanvas);</code></pre>
 				<p><code>bottomCanvas</code> is able to handle mouse events.</p>
-				<pre><code class="language-js">bottomCanvas.addEventListener(<span class="hljs-string">&quot;mousedown&quot;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+				<pre><code class="language-js">bottomCanvas.addEventListener(<span class="hljs-string">&quot;mousedown&quot;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(e.type);
 });</code></pre>
 				<p><a href="https://masatomakino.github.io/createjs-mouse-event-transmitter/api/index.html">API documents</a></p>

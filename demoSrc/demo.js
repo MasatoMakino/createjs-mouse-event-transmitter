@@ -1,4 +1,4 @@
-import { MouseEventTransmitter } from "../bin/index";
+import { MouseEventTransmitter } from "../";
 
 const onDomContentsLoaded = () => {
   //ステージ更新処理
