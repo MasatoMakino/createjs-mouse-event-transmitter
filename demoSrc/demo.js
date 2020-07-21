@@ -6,7 +6,29 @@ const onDomContentsLoaded = () => {
     stage.update();
   };
 
-  const canvas = document.getElementById("topCanvas");
+  const upperCanvas = initUpperCanvas();
+  const stage = initUpperStage(upperCanvas);
+  addDummyTexts(stage);
+
+  const bottomCanvas = initBottomCanvas();
+  const transmitter = new MouseEventTransmitter(stage, bottomCanvas);
+  initBottomCanvasListeners(bottomCanvas);
+
+  createjs.Ticker.timingMode = createjs.Ticker.RAF;
+  createjs.Ticker.on("tick", updateStage);
+
+  setCanvasStyle([upperCanvas, bottomCanvas]);
+};
+
+const initUpperCanvas = () => {
+  return document.getElementById("topCanvas");
+};
+
+const initBottomCanvas = () => {
+  return document.getElementById("bottomCanvas");
+};
+
+const initUpperStage = (canvas) => {
   const stage = new createjs.Stage(canvas);
   stage.enableMouseOver();
 
@@ -16,6 +38,10 @@ const onDomContentsLoaded = () => {
   shape.y = 360;
   stage.addChild(shape);
 
+  return stage;
+};
+
+const addDummyTexts = (stage) => {
   for (let i = 0; i < 4; i++) {
     const text = new createjs.Text(
       "hit test : this text not hit mouse events.",
@@ -25,12 +51,9 @@ const onDomContentsLoaded = () => {
     text.mouseEnabled = false;
     stage.addChild(text);
   }
+};
 
-  const bottomCanvas = document.getElementById("bottomCanvas");
-
-  const transmitter = new MouseEventTransmitter(stage, bottomCanvas);
-  console.log(transmitter);
-
+const initBottomCanvasListeners = (bottomCanvas) => {
   bottomCanvas.addEventListener("mousedown", (e) => {
     console.log(e.type);
   });
@@ -43,11 +66,9 @@ const onDomContentsLoaded = () => {
   bottomCanvas.addEventListener("wheel", (e) => {
     console.log(e.type);
   });
+};
 
-  createjs.Ticker.timingMode = createjs.Ticker.RAF;
-  createjs.Ticker.on("tick", updateStage);
-
-  const canvasArray = [canvas, bottomCanvas];
+const setCanvasStyle = (canvasArray) => {
   canvasArray.forEach((canvas, index) => {
     const style = canvas.style;
     style.position = "absolute";
