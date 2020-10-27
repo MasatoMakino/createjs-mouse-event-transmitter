@@ -5,7 +5,7 @@
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![Maintainability](https://api.codeclimate.com/v1/badges/609f4a04b73c29bfeca2/maintainability)](https://codeclimate.com/github/MasatoMakino/createjs-mouse-event-transmitter/maintainability)
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=createjs-mouse-event-transmitter&show_owner=true)](https://github.com/MasatoMakino/createjs-mouse-event-transmitter)
+[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=createjs-mouse-event-transmitter)](https://github.com/MasatoMakino/createjs-mouse-event-transmitter)
 
 This feature is similar to [nextStage](https://createjs.com/docs/easeljs/classes/Stage.html#property_nextStage) property of createjs. The difference is the class of target.
 
