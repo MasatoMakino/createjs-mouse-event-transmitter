@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for createjs-mouse-event-transmitter">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,11 +50,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>createjs-mouse-event-transmitter</h1>
 		</div>
 	</div>
@@ -85,42 +79,50 @@
 					<h3>Install</h3>
 				</a>
 				<p>createjs-mouse-event-transmitter depend on <a href="https://github.com/CreateJS/EaselJS">CreateJS / EaselJS</a></p>
-				<pre><code class="language-bash">npm install easeljs --save-dev</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">npm install easeljs --save-dev</span>
+</code></pre>
 				<p>or load script files in html.</p>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://code.createjs.com/1.0.0/easeljs.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://code.createjs.com/1.0.0/easeljs.min.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
 				<p>and</p>
-				<pre><code class="language-bash">npm install https://github.com/MasatoMakino/createjs-mouse-event-transmitter.git --save-dev</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">npm install https://github.com/MasatoMakino/createjs-mouse-event-transmitter.git --save-dev</span>
+</code></pre>
 				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
 					<h3>Import</h3>
 				</a>
 				<p>createjs-mouse-event-transmitter is composed of ES6 modules and TypeScript d.ts files.</p>
 				<p>At first, import a class.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { MouseEventTransmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;createjs-mouse-event-transmitter&quot;</span>;</code></pre>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">MouseEventTransmitter</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;createjs-mouse-event-transmitter&quot;</span><span style="color: #000000">;</span>
+</code></pre>
 				<a href="#setting-stage" id="setting-stage" style="color: inherit; text-decoration: none;">
 					<h3>Setting stage</h3>
 				</a>
 				<p>Enables mouse over events for a stage.</p>
 				<p><a href="https://createjs.com/docs/easeljs/classes/Stage.html#method_enableMouseOver">enableMouseOver</a></p>
-				<pre><code class="language-js">stage.enableMouseOver();</code></pre>
+				<pre><code class="language-js"><span style="color: #001080">stage</span><span style="color: #000000">.</span><span style="color: #795E26">enableMouseOver</span><span style="color: #000000">();</span>
+</code></pre>
 				<a href="#init" id="init" style="color: inherit; text-decoration: none;">
 					<h3>Init</h3>
 				</a>
 				<p>Init html</p>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;topCanvas&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;1920&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;1080&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;bottomCanvas&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;1920&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;1080&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre>
+				<pre><code class="language-html"><span style="color: #800000">&lt;body&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;canvas</span><span style="color: #000000"> </span><span style="color: #FF0000">id</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;topCanvas&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">width</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;1920&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">height</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;1080&quot;</span><span style="color: #800000">&gt;&lt;/canvas&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;canvas</span><span style="color: #000000"> </span><span style="color: #FF0000">id</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;bottomCanvas&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">width</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;1920&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">height</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;1080&quot;</span><span style="color: #800000">&gt;&lt;/canvas&gt;</span>
+<span style="color: #800000">&lt;/body&gt;</span>
+</code></pre>
 				<p>and javascript.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> topCanvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;topCanvas&quot;</span>);
-<span class="hljs-keyword">const</span> stage = <span class="hljs-keyword">new</span> createjs.Stage(topCanvas);
-stage.enableMouseOver();
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">topCanvas</span><span style="color: #000000"> = </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementById</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;topCanvas&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stage</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">createjs</span><span style="color: #000000">.</span><span style="color: #795E26">Stage</span><span style="color: #000000">(</span><span style="color: #001080">topCanvas</span><span style="color: #000000">);</span>
+<span style="color: #001080">stage</span><span style="color: #000000">.</span><span style="color: #795E26">enableMouseOver</span><span style="color: #000000">();</span>
 
-<span class="hljs-keyword">const</span> bottomCanvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;bottomCanvas&quot;</span>);
-<span class="hljs-keyword">const</span> transmitter = <span class="hljs-keyword">new</span> MouseEventTransmitter(stage, bottomCanvas);</code></pre>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bottomCanvas</span><span style="color: #000000"> = </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementById</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;bottomCanvas&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">transmitter</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">MouseEventTransmitter</span><span style="color: #000000">(</span><span style="color: #001080">stage</span><span style="color: #000000">, </span><span style="color: #001080">bottomCanvas</span><span style="color: #000000">);</span>
+</code></pre>
 				<p><code>bottomCanvas</code> is able to handle mouse events.</p>
-				<pre><code class="language-js">bottomCanvas.addEventListener(<span class="hljs-string">&quot;mousedown&quot;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(e.type);
-});</code></pre>
+				<pre><code class="language-js"><span style="color: #001080">bottomCanvas</span><span style="color: #000000">.</span><span style="color: #795E26">addEventListener</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;mousedown&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">e</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">e</span><span style="color: #000000">.</span><span style="color: #001080">type</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+</code></pre>
 				<p><a href="https://masatomakino.github.io/createjs-mouse-event-transmitter/api/index.html">API documents</a></p>
 				<p>see also <a href="https://masatomakino.github.io/createjs-mouse-event-transmitter/demo/main.js">demo script</a>.</p>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
@@ -132,8 +134,8 @@ stage.enableMouseOver();
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
@@ -141,12 +143,6 @@ stage.enableMouseOver();
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
 						<a href="classes/mouseeventtransmitter.html" class="tsd-kind-icon">Mouse<wbr>Event<wbr>Transmitter</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#stage" class="tsd-kind-icon">Stage</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ticker" class="tsd-kind-icon">Ticker</a>
 					</li>
 				</ul>
 			</nav>
