@@ -1,6 +1,6 @@
 {
   "name": "createjs-mouse-event-transmitter",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Transmit mouse events from createjs stage to other canvas.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
